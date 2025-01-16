@@ -12,19 +12,19 @@ console.log('Type some text here or "exit" to quit.');
 
 rl.on('line', (input) => {
   if (input.trim().toLowerCase() === 'exit') {
-    console.log('exit');
+    console.log('Bye!');
     rl.close();
   } else {
     stream.write(input + '\n');
   }
 });
 
+rl.on('SIGINT', () => {
+  console.log('\nCtrl+C interruption');
+  rl.close();
+});
+
 rl.on('close', () => {
   stream.end();
   process.exit(0);
-});
-
-process.on('SIGINT', () => {
-  console.log('\nCtrl+C interruption');
-  rl.close();
 });
