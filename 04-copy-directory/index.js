@@ -12,10 +12,10 @@ async function copyDir(sourcePath, targetPath) {
     for (const file of files) {
       const srcFilePath = join(sourcePath, file.name);
       const trgFilePath = join(targetPath, file.name);
-      if (file.isFile) {
+      if (file.isFile()) {
         await copyFile(srcFilePath, trgFilePath);
-      } else if (file.isDirectory) {
-        copyDir(srcFilePath, trgFilePath);
+      } else if (file.isDirectory()) {
+        await copyDir(srcFilePath, trgFilePath);
       }
     }
   } catch (err) {
